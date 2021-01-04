@@ -1,0 +1,14 @@
+{
+  "name": "exe1.02",
+  "version": "1.0.0",
+  "description": "Todo app with CRUD",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Loc Hoang",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
