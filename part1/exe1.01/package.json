@@ -1,0 +1,11 @@
+{
+  "name": "exe1.01",
+  "version": "1.0.0",
+  "description": "generate random string on startup, and outputs it every 5 seconds with timestamp",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Loc Hoang",
+  "license": "ISC"
+}
