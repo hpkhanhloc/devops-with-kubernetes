@@ -1,23 +1,25 @@
 const express = require("express");
+const path = require("path");
+const fs = require("fs");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+const directory = path.join("/", "usr", "src", "app", "files");
+const filePath = path.join(directory, "text.txt");
+
 const createString = () => {
   return Math.random().toString(36).substr(2, 10);
 };
-
-const printOutStringWithTimestamp = (randomString) => {
-  console.log(`${new Date().toISOString()}: ${randomString}`);
-
-  setTimeout(printOutStringWithTimestamp, 5000, randomString);
-};
-
 const randomString = createString();
-printOutStringWithTimestamp(randomString);
 
 app.get("/", (req, res) => {
-  res.json(`${new Date().toISOString()}: ${randomString}`);
+  fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) {
+      res.json(err);
+    }
+    res.json(`${data}: ${randomString}`);
+  });
 });
 
 app.listen(PORT, () => {
