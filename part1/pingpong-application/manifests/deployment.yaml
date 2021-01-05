@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pingpong-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingpong-app
+  template:
+    metadata:
+      labels:
+        app: pingpong-app
+    spec:
+      containers:
+        - name: pingpong-app
+          image: hpkhanhloc/pingpong-application:v0.1
+          ports:
+            - containerPort: 3000
