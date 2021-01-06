@@ -12,8 +12,13 @@ spec:
       labels:
         app: pingpong-app
     spec:
+      volumes:
+        - name: shared-text
+          persistentVolumeClaim:
+            claimName: text-claim
       containers:
         - name: pingpong-app
-          image: hpkhanhloc/pingpong-application:v0.1
-          ports:
-            - containerPort: 3000
+          image: hpkhanhloc/pingpong-application:v0.2
+          volumeMounts:
+            - name: shared-text
+              mountPath: /usr/src/app/files

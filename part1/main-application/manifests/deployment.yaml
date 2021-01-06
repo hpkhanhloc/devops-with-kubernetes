@@ -14,7 +14,8 @@ spec:
     spec:
       volumes:
         - name: shared-text
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: text-claim
       containers:
         - name: timestamp-generator
           image: hpkhanhloc/timestamp-generator:v0.1
@@ -22,7 +23,7 @@ spec:
             - name: shared-text
               mountPath: /usr/src/app/files
         - name: timestamp-hash-printer
-          image: hpkhanhloc/timestamp-hash-printer:v0.1
+          image: hpkhanhloc/timestamp-hash-printer:v0.1.1
           volumeMounts:
             - name: shared-text
               mountPath: /usr/src/app/files
