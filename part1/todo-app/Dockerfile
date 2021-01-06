@@ -1,13 +1,13 @@
-FROM node:13
+FROM node:alpine
 
 WORKDIR /usr/src/app
 
-COPY package* ./
+COPY todo-app-backend/package*.json ./
 
 RUN npm ci
 
-COPY . .
+COPY todo-app-backend/ ./
 
 CMD ["npm", "start"]
 
-EXPOSE 3000
+EXPOSE 5000

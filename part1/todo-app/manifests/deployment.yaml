@@ -12,8 +12,12 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: todo-app
+          emptyDir: {}
       containers:
         - name: todo-app
-          image: hpkhanhloc/todo-app:0.4
-          ports:
-            - containerPort: 3000
+          image: hpkhanhloc/todo-app:v0.4.12
+          volumeMounts:
+            - name: todo-app
+              mountPath: /usr/src/app/files
