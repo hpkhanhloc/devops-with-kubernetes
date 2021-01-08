@@ -13,12 +13,8 @@ spec:
         app: pingpong-app
     spec:
       volumes:
-        - name: shared-text
-          persistentVolumeClaim:
-            claimName: text-claim
+        - name: pingpong-volume
+          emptyDir: {}
       containers:
         - name: pingpong-app
           image: hpkhanhloc/pingpong-application:v0.2
-          volumeMounts:
-            - name: shared-text
-              mountPath: /usr/src/app/files
