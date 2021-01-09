@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: devops-exercise
   name: pingpong-app-deployment
 spec:
   replicas: 1
