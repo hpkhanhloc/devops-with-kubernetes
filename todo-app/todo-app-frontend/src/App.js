@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const App = () => {
-  const TODOS = [
-    { id: 1, content: "Todo 1" },
-    { id: 2, content: "Todo 2" },
-  ];
+  const [todos, setTodos] = useState([]);
+  const [newTodo, setNewTodo] = useState("");
+
+  useEffect(() => {
+    const getAllTodos = async () => {
+      await axios.get("/api/todos").then((res) => {
+        setTodos(res.data);
+      });
+    };
+    getAllTodos();
+  }, []);
+
+  const handleOnClick = async () => {
+    await axios.post("/api/todos", { todo: newTodo }).then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        setTodos([...todos, res.data]);
+      }
+    });
+  };
+
+  const handleInput = (event) => {
+    event.preventDefault();
+    setNewTodo(event.target.value);
+  };
 
   return (
     <div>
@@ -15,11 +37,11 @@ const App = () => {
         height={300}
         style={{ display: "block" }}
       />
-      <input />
-      <button>Create Todo</button>
+      <input value={newTodo} onChange={handleInput} />
+      <button onClick={handleOnClick}>Create Todo</button>
       <ul>
-        {TODOS.map((todo) => {
-          return <li key={todo.id}>{todo.content}</li>;
+        {todos.map((todo) => {
+          return todo !== "" && <li key={todos.indexOf(todo)}>{todo}</li>;
         })}
       </ul>
       <div></div>
