@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pingpong-ss
+spec:
+  serviceName: pingpong-postgres-svc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingpong-postgres-app
+  template:
+    metadata:
+      labels:
+        app: pingpong-postgres-app
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:12
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          ports:
+            - containerPort: 5432
+              name: postgresdb
+          volumeMounts:
+            - name: data
+              mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 100Mi

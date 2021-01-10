@@ -13,9 +13,6 @@ spec:
       labels:
         app: pingpong-app
     spec:
-      volumes:
-        - name: pingpong-volume
-          emptyDir: {}
       containers:
         - name: pingpong-app
-          image: hpkhanhloc/pingpong-application:v0.2.2
+          image: hpkhanhloc/pingpong-application:v0.3.5
