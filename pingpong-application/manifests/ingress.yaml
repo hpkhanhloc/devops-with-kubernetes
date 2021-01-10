@@ -11,4 +11,4 @@ spec:
           - path: /pingpong
             backend:
               serviceName: pingpong-svc
-              servicePort: 2345
+              servicePort: 80

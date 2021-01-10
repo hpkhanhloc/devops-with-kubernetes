@@ -23,8 +23,10 @@ app.get("/", async (req, res) => {
     }
     text = data;
   });
-  await axios.get("/pingpong").then((res) => (pingpong = res.data));
-  res.json(`${text}: ${randomString}, ${pingpong}`);
+  await axios
+    .get("http://pingpong-svc:80")
+    .then((res) => (pingpong = res.data));
+  res.json(`${process.env.message} ${text}: ${randomString}, ${pingpong}`);
 });
 
 app.listen(PORT, () => {

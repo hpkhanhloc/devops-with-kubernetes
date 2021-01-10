@@ -18,4 +18,4 @@ spec:
           emptyDir: {}
       containers:
         - name: pingpong-app
-          image: hpkhanhloc/pingpong-application:v0.2
+          image: hpkhanhloc/pingpong-application:v0.2.2

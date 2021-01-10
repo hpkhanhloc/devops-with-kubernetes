@@ -6,7 +6,7 @@ const directory = path.join("/", "usr", "src", "app", "files");
 const filePath = path.join(directory, "pingpong.txt");
 const app = express();
 
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 8080;
 
 let counter = 0;
 
