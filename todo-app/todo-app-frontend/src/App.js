@@ -17,7 +17,7 @@ const App = () => {
   const handleOnClick = async () => {
     await axios.post("/api/todos", { todo: newTodo }).then((res) => {
       console.log(res);
-      if (res.status === 200) {
+      if (res.status === 201) {
         setTodos([...todos, res.data]);
       }
     });
@@ -40,11 +40,10 @@ const App = () => {
       <input value={newTodo} onChange={handleInput} />
       <button onClick={handleOnClick}>Create Todo</button>
       <ul>
-        {todos.map((todo) => {
-          return todo !== "" && <li key={todos.indexOf(todo)}>{todo}</li>;
-        })}
+        {todos.map((todo) => (
+          <li key={todo.id}>{todo.to_do}</li>
+        ))}
       </ul>
-      <div></div>
     </div>
   );
 };

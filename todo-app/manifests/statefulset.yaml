@@ -1,40 +1,40 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pp-postgres-svc
+  name: postgres-svc
   labels:
-    app: pp-postgres
+    app: postgres
 spec:
   ports:
     - port: 5432
-      name: pp-web
+      name: web
   clusterIP: None
   selector:
-    app: pp-postgres
+    app: postgres
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: pp-postgres-ss
+  name: postgres-ss
 spec:
-  serviceName: pp-postgres-svc
+  serviceName: postgres
   replicas: 1
   selector:
     matchLabels:
-      app: pp-postgres
+      app: postgres
   template:
     metadata:
       labels:
-        app: pp-postgres
+        app: postgres
     spec:
       containers:
         - name: postgres
           image: postgres:13.0
           envFrom:
             - configMapRef:
-                name: postgres-config
+                name: todos-postgres-config
           ports:
-            - name: pp-web
+            - name: web
               containerPort: 5432
           volumeMounts:
             - name: data

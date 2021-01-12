@@ -18,7 +18,12 @@ spec:
           emptyDir: {}
       containers:
         - name: todo-app
-          image: hpkhanhloc/todo-app:v0.5.17
+          image: hpkhanhloc/todo-app:v0.6.20
+          envFrom:
+            - configMapRef:
+                name: todos-postgres-config
+          ports:
+            - containerPort: 5000
           volumeMounts:
             - name: todo-app
               mountPath: /usr/src/app/files

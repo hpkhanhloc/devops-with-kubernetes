@@ -4,11 +4,17 @@ const fs = require("fs");
 const axios = require("axios");
 const path = require("path");
 const bodyParser = require("body-parser");
+const db = require("./queries");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 app.use(express.static("build"));
 
 const createString = () => {
@@ -19,7 +25,6 @@ const todayToString = moment().format("DD-MM-YYYY");
 
 const directory = path.join("/", "usr", "src", "app", "files");
 const imagePath = path.join(directory, `${todayToString}.jpg`);
-const todoPath = path.join(directory, "todos.txt");
 
 const fileAlreadyExists = async (file) =>
   new Promise((res) => {
@@ -40,15 +45,7 @@ const cachedImage = async () => {
   }
 };
 
-const createTodoFile = async () => {
-  if (!(await fileAlreadyExists(todoPath))) {
-    await new Promise((res) => fs.mkdir(directory, (err) => res()));
-    fs.closeSync(fs.openSync(todoPath, "w"));
-  }
-};
-
 cachedImage();
-createTodoFile();
 
 app.get("/", (req, res) => {
   const randomString = createString();
@@ -59,28 +56,9 @@ app.get("/api/dailyimage", (req, res) => {
   res.sendFile(imagePath);
 });
 
-app.get("/api/todos", async (req, res) => {
-  fs.readFile(todoPath, "utf8", (err, data) => {
-    if (err) res(err);
-    const todos = data.split(/\r?\n/);
-    res.json(todos);
-  });
-});
+app.get("/api/todos", db.getTodos);
 
-app.post("/api/todos", async (req, res, next) => {
-  const { body } = req;
-  if (!body.todo) {
-    return res.status(400).json({
-      error: "todo missing",
-    });
-  }
-  try {
-    fs.appendFileSync(todoPath, body.todo);
-    res.status(200).json(body.todo);
-  } catch (err) {
-    next(err);
-  }
-});
+app.post("/api/todos", db.postTodo);
 
 app.listen(PORT, () => {
   console.log(`Server started in port ${PORT}`);

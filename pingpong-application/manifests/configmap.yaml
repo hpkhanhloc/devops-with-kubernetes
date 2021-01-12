@@ -3,6 +3,4 @@ kind: ConfigMap
 metadata:
   name: postgres-config
 data:
-  POSTGRES_DB: awesomedb
-  POSTGRES_USER: amazinguser
   POSTGRES_PASSWORD: perfectpassword

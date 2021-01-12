@@ -15,4 +15,9 @@ spec:
     spec:
       containers:
         - name: pingpong-app
-          image: hpkhanhloc/pingpong-application:v0.3.5
+          image: hpkhanhloc/pingpong-application:v0.3.11
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          ports:
+            - containerPort: 3000
