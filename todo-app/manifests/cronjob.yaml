@@ -1,0 +1,15 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: create-todo
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: create-todo
+              image: hpkhanhloc/create_todo_everyday:v0.1.0
+              imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
