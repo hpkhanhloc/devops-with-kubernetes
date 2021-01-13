@@ -18,7 +18,7 @@ spec:
           emptyDir: {}
       containers:
         - name: todo-app
-          image: hpkhanhloc/todo-app:v0.6.20
+          image: hpkhanhloc/todo-app:v0.6.21
           envFrom:
             - configMapRef:
                 name: todos-postgres-config
