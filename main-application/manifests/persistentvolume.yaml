@@ -3,7 +3,6 @@ kind: PersistentVolume
 metadata:
   name: main-app-pingpong
 spec:
-  storageClassName: manual
   capacity:
     storage: 1Gi
   volumeMode: Filesystem

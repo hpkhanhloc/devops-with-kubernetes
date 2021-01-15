@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: devops-exercise
   name: main-application
 spec:
   replicas: 1
@@ -24,10 +23,10 @@ spec:
             - name: shared-text
               mountPath: /usr/src/app/files
         - name: timestamp-hash-printer
-          image: hpkhanhloc/timestamp-hash-printer:v0.3.4
+          image: hpkhanhloc/timestamp-hash-printer:v0.3.7
           volumeMounts:
             - name: shared-text
               mountPath: /usr/src/app/files
           envFrom:
             - configMapRef:
-                name: main-application-env-file
+                name: main-application-env

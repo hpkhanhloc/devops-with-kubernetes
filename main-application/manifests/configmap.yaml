@@ -1,0 +1,7 @@
+# Or running command kubectl create configmap main-application-env --from-env-file=manifests/main-application-env.properties
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+data:
+    message: Hello

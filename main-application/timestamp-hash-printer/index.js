@@ -25,8 +25,11 @@ app.get("/", async (req, res) => {
   });
   await axios
     .get("http://pingpong-svc:80")
-    .then((res) => (pingpong = res.data));
-  res.json(`${process.env.message} ${text}: ${randomString}, ${pingpong}`);
+    .then((res) => {
+      console.log(res.data)
+      pingpong = res.data[0].count
+    });
+  res.json(`${process.env.message} ${text}: ${randomString}, Ping/pong: ${pingpong}`);
 });
 
 app.listen(PORT, () => {
