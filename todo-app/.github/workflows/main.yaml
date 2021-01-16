@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Create image name and tag
-      run: echo "::set-env name=IMAGE_WITH_TAG::gcr.io/${{ secrets.GKE_PROJECT }}/$IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
+      run: echo "IMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT }}/$IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
 
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
@@ -44,4 +44,4 @@ jobs:
       run: |-
         ./kustomize edit set image PROJECT/IMAGE=$IMAGE_WITH_TAG
         kubectl apply -k .
-        kubectl rollout status deployment $IMAGE
+        kubectl rollout status deployment deployment/$IMAGE
