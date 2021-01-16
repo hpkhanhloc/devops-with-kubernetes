@@ -18,6 +18,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Get branch name
+      run: echo "BRANCH=${{ github.event.ref_type }}" >> $GITHUB_ENV
+
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
       with:
@@ -34,4 +37,4 @@ jobs:
     # Delete namespace and env
     - name: Delete
       run: |-
-        kubectl delete namespace ${GITHUB_REF#refs/heads/}
+        kubectl delete namespace ${BRANCH}
