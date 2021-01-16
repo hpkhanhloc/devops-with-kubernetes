@@ -1,4 +1,4 @@
-name: Build and Deploy to GKE
+name: Delete environment of branch
 
 on:
   delete:
