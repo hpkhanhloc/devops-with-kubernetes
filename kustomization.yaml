@@ -10,4 +10,4 @@ resources:
 - todo-app/manifests/horizontalpodautoscaler.yaml
 images:
   - name: PROJECT/IMAGE
-    newName: hpkhanhloc/todo-app:v0.6.21
+    newName: hpkhanhloc/todo-app:v0.6.26
