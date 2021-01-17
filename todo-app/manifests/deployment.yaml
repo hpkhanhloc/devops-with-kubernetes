@@ -18,6 +18,10 @@ spec:
       containers:
         - name: todo-app
           image: PROJECT/IMAGE
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "100Mi"
           envFrom:
             - configMapRef:
                 name: todos-postgres-config

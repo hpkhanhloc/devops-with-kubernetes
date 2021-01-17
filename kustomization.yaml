@@ -7,6 +7,7 @@ resources:
 - todo-app/manifests/statefulset.yaml
 - todo-app/manifests/deployment.yaml
 - todo-app/manifests/cronjob.yaml
+- todo-app/manifests/horizontalpodautoscaler.yaml
 images:
   - name: PROJECT/IMAGE
     newName: hpkhanhloc/todo-app:v0.6.21
