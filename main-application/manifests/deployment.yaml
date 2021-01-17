@@ -19,11 +19,19 @@ spec:
       containers:
         - name: timestamp-generator
           image: hpkhanhloc/timestamp-generator:v0.1
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "100Mi"
           volumeMounts:
             - name: shared-text
               mountPath: /usr/src/app/files
         - name: timestamp-hash-printer
           image: hpkhanhloc/timestamp-hash-printer:v0.3.7
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "100Mi"
           volumeMounts:
             - name: shared-text
               mountPath: /usr/src/app/files

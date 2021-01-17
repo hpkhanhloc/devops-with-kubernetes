@@ -15,6 +15,10 @@ spec:
       containers:
         - name: pingpong-app
           image: hpkhanhloc/pingpong-application:v0.3.11
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "100Mi"
           envFrom:
             - configMapRef:
                 name: postgres-config
