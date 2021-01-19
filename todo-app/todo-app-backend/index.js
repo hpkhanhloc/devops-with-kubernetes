@@ -5,8 +5,10 @@ const axios = require("axios");
 const path = require("path");
 const bodyParser = require("body-parser");
 const db = require("./queries");
+const probe = require("kube-probe");
 
 const app = express();
+probe(app);
 const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
