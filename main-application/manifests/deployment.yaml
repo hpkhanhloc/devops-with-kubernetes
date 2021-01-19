@@ -27,7 +27,13 @@ spec:
             - name: shared-text
               mountPath: /usr/src/app/files
         - name: timestamp-hash-printer
-          image: hpkhanhloc/timestamp-hash-printer:v0.3.7
+          image: hpkhanhloc/timestamp-hash-printer:v0.3.8
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: http://pingpong-svc:80
+              port: 3000
           resources:
             limits:
               cpu: "150m"

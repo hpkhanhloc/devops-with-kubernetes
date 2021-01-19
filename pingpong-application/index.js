@@ -1,6 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const probe = require("kube-probe");
 const app = express();
+
+// Add 2 GET /api/health/liveness and /api/health/readiness
+probe(app);
+
 const db = require("./queries");
 
 const PORT = process.env.PORT || 3000;

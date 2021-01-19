@@ -14,7 +14,13 @@ spec:
     spec:
       containers:
         - name: pingpong-app
-          image: hpkhanhloc/pingpong-application:v0.3.11
+          image: hpkhanhloc/pingpong-application:v0.3.13
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /
+              port: 3000
           resources:
             limits:
               cpu: "150m"

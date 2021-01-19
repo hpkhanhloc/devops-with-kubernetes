@@ -2,7 +2,10 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const axios = require("axios");
+const probe = require("kube-probe");
 const app = express();
+
+probe(app, { readinessUrl: "http://pingpong-svc:80" });
 
 const PORT = process.env.PORT || 3000;
 
@@ -23,13 +26,13 @@ app.get("/", async (req, res) => {
     }
     text = data;
   });
-  await axios
-    .get("http://pingpong-svc:80")
-    .then((res) => {
-      console.log(res.data)
-      pingpong = res.data[0].count
-    });
-  res.json(`${process.env.message} ${text}: ${randomString}, Ping/pong: ${pingpong}`);
+  await axios.get("http://pingpong-svc:80").then((res) => {
+    console.log(res.data);
+    pingpong = res.data[0].count;
+  });
+  res.json(
+    `${process.env.message} ${text}: ${randomString}, Ping/pong: ${pingpong}`
+  );
 });
 
 app.listen(PORT, () => {
