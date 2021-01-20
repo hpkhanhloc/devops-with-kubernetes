@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: todo-app-dep
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: todo-app-update
+  strategy:
+    canary:
+      steps:
+      - setWeight: 50
+      - analysis:
+          templates:
+          - templateName: restart-rate
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      volumes:
+        - name: todo-app
+          emptyDir: {}
+      containers:
+        - name: todo-app
+          image: PROJECT/IMAGE
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+               path: /api/todos
+               port: 5000
+          livenessProbe:
+            initialDelaySeconds: 20 
+            periodSeconds: 5
+            httpGet:
+               path: /api/health/liveness
+               port: 5000
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "500Mi"
+          envFrom:
+            - configMapRef:
+                name: todos-postgres-config
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: todo-app
+              mountPath: /usr/src/app/files

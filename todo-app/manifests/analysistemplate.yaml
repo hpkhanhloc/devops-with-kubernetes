@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: restart-rate
+spec:
+  metrics:
+  - name: restart-rate
+    initialDelay: 3m
+    successCondition: result < 3
+    provider:
+      prometheus:
+        address: http://lens-metrics.prometheus.svc.cluster.local:9090
+        query: |
+          scalar(
+            sum(kube_pod_container_status_restarts_total{namespace="default", container="todo-app"}) -
+            sum(kube_pod_container_status_restarts_total{namespace="default", container="todo-app"} offset 3m)
+          )
