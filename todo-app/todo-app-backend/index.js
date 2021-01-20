@@ -62,6 +62,8 @@ app.get("/api/todos", db.getTodos);
 
 app.post("/api/todos", db.postTodo);
 
+app.put("/api/todos/:id", db.putTodo);
+
 app.listen(PORT, () => {
   console.log(`Server started in port ${PORT}`);
 });

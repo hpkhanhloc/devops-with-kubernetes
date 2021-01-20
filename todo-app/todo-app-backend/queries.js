@@ -23,4 +23,13 @@ const postTodo = async (request, response) => {
   }
 };
 
-module.exports = { getTodos, postTodo };
+const putTodo = async (request, response) => {
+  const id = parseInt(request.params.id);
+  console.log(`Update todo ${id}`);
+  await pool
+    .query("UPDATE todos SET status = $1 WHERE ID = $2", ["Done", id])
+    .then((result) => response.status(200).send(`Updated todo id: ${id}`))
+    .catch((e) => console.error(e.stack));
+};
+
+module.exports = { getTodos, postTodo, putTodo };
