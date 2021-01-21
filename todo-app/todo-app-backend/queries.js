@@ -2,6 +2,9 @@ const { Pool } = require("pg");
 const connectionString = `postgres://postgres:${process.env.POSTGRES_PASSWORD}@postgres-svc:5432/postgres`;
 const pool = new Pool({ connectionString: connectionString });
 
+const NATS = require("nats");
+const nc = NATS.connect(process.env.NATS_URL, { json: true });
+
 const getTodos = async (request, response) => {
   console.log("Get all todos...");
   await pool
@@ -28,7 +31,13 @@ const putTodo = async (request, response) => {
   console.log(`Update todo ${id}`);
   await pool
     .query("UPDATE todos SET status = $1 WHERE ID = $2", ["Done", id])
-    .then((result) => response.status(200).send(`Updated todo id: ${id}`))
+    .then((result) => {
+      nc.publish("updateTodo", {
+        user: "bot",
+        message: "A todo updated",
+      });
+      response.status(200).send(`Updated todo id: ${id}`);
+    })
     .catch((e) => console.error(e.stack));
 };
 

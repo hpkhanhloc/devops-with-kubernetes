@@ -1,7 +1,7 @@
 {
-  "name": "exe1.02",
+  "name": "pub_sub_app",
   "version": "1.0.0",
-  "description": "Todo app with CRUD",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -11,9 +11,6 @@
   "dependencies": {
     "axios": "^0.21.1",
     "express": "^4.17.1",
-    "kube-probe": "^1.0.2",
-    "moment": "^2.29.1",
-    "nats": "^1.4.12",
-    "pg": "^8.5.1"
+    "nats": "^1.4.12"
   }
 }

@@ -4,3 +4,4 @@ metadata:
   name: todos-postgres-config
 data:
   POSTGRES_PASSWORD: todospassword
+  NATS_URL: nats://my-nats:4222

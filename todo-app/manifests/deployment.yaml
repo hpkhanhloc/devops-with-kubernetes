@@ -42,3 +42,12 @@ spec:
           volumeMounts:
             - name: todo-app
               mountPath: /usr/src/app/files
+        - name: subscribe-message
+          image: hpkhanhloc/pub_sub_app:v0.0.7
+          env:
+          - name: NATS_URL
+            value: nats://my-nats:4222
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "100Mi"
