@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      volumes:
+        - name: todo-app
+          emptyDir: {}
+      containers:
+        - name: todo-app
+          image: hpkhanhloc/todo-app:v0.7.7
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+               path: /api/todos
+               port: 5000
+          livenessProbe:
+            initialDelaySeconds: 20 
+            periodSeconds: 5
+            httpGet:
+               path: /api/health/liveness
+               port: 5000
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "500Mi"
+          envFrom:
+            - configMapRef:
+                name: todos-postgres-config
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: todo-app
+              mountPath: /usr/src/app/files
+        - name: subscribe-message
+          image: hpkhanhloc/pub_sub_app:v0.0.7
+          env:
+          - name: NATS_URL
+            value: nats://my-nats:4222
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "100Mi"
