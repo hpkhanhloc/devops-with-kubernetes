@@ -1,0 +1,17 @@
+{
+  "name": "controller",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Loc Hoang",
+  "license": "ISC",
+  "dependencies": {
+    "@kubernetes/client-node": "^0.13.2",
+    "json-stream": "^1.0.0",
+    "mustache": "^4.1.0",
+    "node-fetch": "^2.6.1"
+  }
+}

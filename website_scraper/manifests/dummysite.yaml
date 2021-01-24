@@ -1,0 +1,7 @@
+apiVersion: stable.dwk/v1
+kind: DummySite
+metadata:
+  name: scraper
+spec:
+  website_url: https://example.com/
+  image: hpkhanhloc/dummysite:v0.0.2

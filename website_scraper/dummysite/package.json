@@ -1,0 +1,15 @@
+{
+  "name": "dummysite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Loc Hoang",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "website-scraper": "^4.2.3"
+  }
+}
