@@ -1,8 +1,0 @@
-Exercise 3.06: DBaaS vs DIY
-- DBaaS: it can be Cloud SQL, Bigtable or other services, it can be seen as fully managed databases. Google will handle maintenance tasks, backup, patching and scaling. The benefit is that, developers dont need to mess with these tasks above, just need to 
-create database and focus on building app, the rest will be handled by Google Cloud. In contrast, it mean that developers might not have access to the exact version of database, extension or the exact flavor of database that they want.
-- Run database on Kubernetes: Developer get full of options in addition benefits from automation of Kubernetes. However, pods are transient, so that the possible that database application restarts or failovers is higher. And some database administrative tasks: backup,
-scaling, tuning, etc. are different due to the added abstractions that come with containerization.
-
-Exercise 3.07: Commitment
-- It will depend on context of application to select suitable solution for database. In this term of project, for learning purpose, I will select to run database on Kubernetes, I suppose it is faster compare with define conection between Cloud SQL and Kubernetes Engine.
