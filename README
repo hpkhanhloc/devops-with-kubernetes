@@ -21,3 +21,30 @@ Rancher:
 - Follow industry practice and CNCF
 - Lauches clusters in minutes and can run Kubernetes anywhere
 - There are APIs equivalence for all functions 
+
+Exercise 5.06
+1. Used MariaDB outside of this course
+2. Have used MongoDB outside of this course
+3. Have used PostgresSQL outside of this course and use it for todo-app, pingpong-application
+4. Use HELM for install something in this course
+5. Have used Github Actions in this course and outside also
+6. Have used Gitlab outside of this course
+7. Have used Google Cloud Build in this course and outside
+8. Have used Jenkins outside of this course
+9. Have used Travis CI indirectly outside of this course, not sure how it works
+10. Have used Kubernetes in this course and outside for scheduling and orchestration
+11. Have used NGINX outside of this course for support proxy
+12. Use Traefik proxy in this course for pingpong-application
+13. Use Linkerd in part 5 this course
+14. Have use Google Persistent Disk in this course
+15. Have use Terraform outside of this course for configuration and automation project in Google Cloud
+16. Have use Google Container Registry in part 3 this course and outside also.
+17. Have use Docker in this course and outside for build images
+18. Use Rancher in this course at platform
+19. Have use Google Kubernetes Engine in this course and outside
+20. Have use Google Cloud in this course and outside
+21. Use Prometheus in this course for analysis
+22. Use Grafana in this course for analysis
+23. Have used Google Stackdriver outside of this course for analysis project
+24. Have used Elastic outside this course for logging
+25. Use Grafana Loki in this course
