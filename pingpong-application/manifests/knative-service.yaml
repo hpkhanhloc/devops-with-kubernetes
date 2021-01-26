@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: pingpong-app
+spec:
+  template:
+    metadata:
+      name: pingpong-app-v1
+    spec:
+      containers:
+        - image: hpkhanhloc/pingpong-application:v0.3.14
+          envFrom:
+            - configMapRef:
+                name: postgres-config
